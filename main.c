@@ -19,23 +19,17 @@ int main ()
 
     reader(tabProductsCat, listProductsCat);
 
+    // Ouverture du fichier [pour la liste des clients sous forme de tableaux (Principe imcomplet) idee initale abandonne]
     
-
-    // Ouverture du fichier pour la liste des clients sous forme de tableaux (Principe imcomplet)
-    
-    FILE *listCustomer = fopen("customer_list.txt", "r+");
+    FILE *listCustomer = fopen("customer_list.txt", "a+");
     if (listCustomer == NULL)
     {
         exit(1);
     }
 
-    CUSTOMER tabCustomer[255]; 
-
-    readerCustomer(tabCustomer, listCustomer);
-
     int menuSelection = 0;
 
-    while (1)
+    while (1) //Ouverture du menu principal GESTION ou ACHAT
     {
         mainMenu();
 
@@ -49,7 +43,7 @@ int main ()
         break;
 
         case 2 : 
-            displayCustomerMode(tabCustomer, listCustomer);
+            displayCustomerMode(listCustomer, tabProductsCat);
         break;
 
         case 3 : 

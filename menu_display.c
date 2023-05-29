@@ -14,7 +14,7 @@ void mainMenu() // Affichage du menu principal : choix GESTION ou ACHAT
 	printf("\n-------------------------------------------------\n");
 }
 
-void managementModeSelection ()
+void managementModeSelection () // Affichage du menu gestion
 {
 	printf("\n-------------------------------------------------\n");
 	printf("\n[MODE GESTION]\n");
@@ -24,13 +24,13 @@ void managementModeSelection ()
 	printf("\n-------------------------------------------------\n");
 }
 
-void managementModeSelectionSearch (PRODUCTS productsX[])
+void managementModeSelectionSearch (PRODUCTS productsX[]) // Affiche du menu gestion recherche
 {
 	printf("\n-------------------------------------------------\n");
 	searchNameOrInventory(productsX);
 }
 
-void managementModeSelectionIncrease (PRODUCTS productsX[], FILE *listProductsCat)
+void managementModeSelectionIncrease (PRODUCTS productsX[], FILE *listProductsCat) // Affiche le menu pour augmenter les stocks
 {
 	printf("\n-------------------------------------------------\n");
 	printf("[MODE GESTION - AUGMENTION STOCK]\n");
@@ -39,6 +39,7 @@ void managementModeSelectionIncrease (PRODUCTS productsX[], FILE *listProductsCa
 
 void managementMode (PRODUCTS productsX[], FILE *listProductsCat) // Affichage pour le mode gestion
 {
+	displayInventoryCatZero(productsX);
 	printf("\n[MODE GESTION]\n");
 	printf("\nVous avez selectionne le mode gestion; que souhaitez-vous faire : \n");
 
@@ -46,7 +47,6 @@ void managementMode (PRODUCTS productsX[], FILE *listProductsCat) // Affichage p
 
 	while (1)
     {
-    	displayInventoryCatZero(productsX);
     	managementModeSelection();
 
         printf("\nSaissisez votre choix pour le mode gestion : \n");
@@ -75,27 +75,36 @@ void managementMode (PRODUCTS productsX[], FILE *listProductsCat) // Affichage p
     }
 }
 
-void displayCustomerMode (CUSTOMER customerX[], FILE *fichier)
+void displayCustomerMode (FILE* fichier, PRODUCTS productsX[]) // Menu de la partie customer cad la partie achat et authentification
 {
 	int selectionCustomer;
-	printf("[MODE ACHAT]\n");
-	printf("Avant toute chose, etes vous client ?\n (1) Oui, je suis client \n(2) Non mais j'aimerais beaucoup\n");
-	scanf("%d", &selectionCustomer);
-
-	switch(selectionCustomer)
+	float price;
+	fseek(fichier, 0, SEEK_SET);
+	
+	while (1)
 	{
-	case 1 :
-		client(customerX, fichier);
-		break;
+		printf("[MODE ACHAT]\n");
+		printf("Avant toute chose, etes vous client ?\n (1) Oui, je suis client \n(2) Non mais j'aimerais beaucoup\n (3) Je souhaite quitter le menu a-chat\n");
+		scanf("%d", &selectionCustomer);
 
-	case 2 : 
-		newClient(customerX, fichier);
-		break;
+		int numberListClient;
+		switch(selectionCustomer)
+		{
+		case 1 :
+			clientVersion2(productsX);
+			break;
 
-	default : 
+		case 2 : 
+			newClientVersion2();
+			break;
+		case 3 :
+			return;
+			break;
+
+		default : 
         	printf("Mauvaise selection mais pas de panique !\n");
-        break;
+        	break;
+		}
 	}
-
 }
 

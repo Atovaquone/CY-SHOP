@@ -14,6 +14,6 @@ void managementModeSelection (); // Affichage des 2 choix pour le mode GESTION
 
 void managementMode (PRODUCTS productsX[], FILE *listProductsCat); // Affichage pour le mode gestion 
 
-void displayCustomerMode (CUSTOMER customerX[], FILE *fichier); // Choix du menu pour le mode achat 
+void displayCustomerMode (FILE* fichier, PRODUCTS productsX[]); // Choix du menu pour le mode achat 
 
 #endif
